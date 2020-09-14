@@ -1,0 +1,13 @@
+{
+    "api": {
+        "port": 3001,
+        "jwtsecret": "supersecret"
+    },
+    "db": {
+        "user": "khxkvaogaypkqm",
+        "host": "ec2-50-16-198-4.compute-1.amazonaws.com",
+        "database": "den0kdq4megq6q",
+        "password": "e9d07f9835e7445e16b737e15852bcf6aa7fc7d929ece510d1f919e8078ddfe5",
+        "port": 5432
+    }
+}
