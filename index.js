@@ -4,7 +4,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
 const db = require('./queries')
-const port = config.get('api.port')
+const port = process.env.PORT || config.get('api.port')
 var jwt = require('jsonwebtoken');
 var cors = require('cors')
 
