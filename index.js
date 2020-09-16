@@ -47,6 +47,7 @@ app.put('/api/atleta/:idAtleta', verifyJWT, db.updateAtleta);
 app.put('/api/statusatleta/:idAtleta', verifyJWT, db.updateStatusAtleta);
 app.put('/api/coach/:idCoach', verifyJWT, db.updateCoach);
 app.put('/api/planilha/:idPlanilha', verifyJWT, db.updatePlanilha);
+app.put('/api/planilhaatleta/:idPlanilha/:idAtleta', verifyJWT, db.updatePlanilhaAtleta);
 
 app.post('/api/prhistory/:idAtleta/:idMovimento', verifyJWT, db.insertPRHistory);
 app.post('/api/planilha/:idCoach', verifyJWT, db.insertPlanilha);

@@ -151,7 +151,7 @@ const getAtleta = (request, response) => {
 
 const getAtletas = (request, response) => {
     pool.query(`select 
-    u.id, u.nome as nome, u.email, p.nome as planilha,  pa.situacaopagamento as status
+    u.id, u.nome as nome, u.email, p.nome as planilha,  pa.situacaopagamento as status, pa.idplanilha
 from usuario u inner join planilhaatleta pa on pa.idatleta = u.id
                inner join planilhas p on p.id = pa.idplanilha
 where u.idcoach = ${request.params.idCoach} order by u.id`, (error, results) => {
@@ -262,6 +262,17 @@ const getPlanilha = (request, response) => {
     FROM planilhas 
     WHERE
     id = ${request.params.idPlanilha}`, (error, results) => {
+        if (error) {
+            throw error
+        }
+
+        response.status(200).json(results.rows[0])
+    })
+}
+
+const updatePlanilhaAtleta = (request, response) => {
+    pool.query(`update planilhaatleta set idplanilha = ${request.params.idPlanilha} 
+                where idatleta = ${request.params.idAtleta}`, (error, results) => {
         if (error) {
             throw error
         }
@@ -600,6 +611,7 @@ module.exports = {
     updateAtleta,
     updateCoach,
     updatePlanilha,
+    updatePlanilhaAtleta,
     updateStatusAtleta,
 
     insertPRHistory,
