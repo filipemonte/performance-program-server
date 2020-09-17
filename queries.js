@@ -210,6 +210,16 @@ const insertPRHistory = (request, response) => {
     })
 }
 
+const updatePRHistory = (request, response) => {
+    pool.query(`update personalrecord set data = '${request.body.DataPR}', resultado = ${request.body.ResultadoPR} 
+            where id = ${request.body.idEdicao}`, (error, results) => {
+        if (error) {
+            throw error
+        }
+        response.status(200).json(results.rows[0])
+    })
+}
+
 const insertTreinoDone = (request, response) => {
     pool.query(`insert into treinoatleta (id, idatleta, idtreino, idplanilha, done, comentario)
     values (default, ${request.params.idAtleta}, ${request.body.idTreino}, ${request.body.idPlanilha}, true, '${request.body.comentario}')`, (error, results) => {
@@ -581,7 +591,7 @@ function filterData(value)
 
 const gerarToken = (id) => {
     var token = jwt.sign({ id }, config.get('api.jwtsecret'), {
-        expiresIn: 3600 // expires in 5min
+        expiresIn: 2 // expires in 5min
     });
 
     return token;
@@ -613,6 +623,7 @@ module.exports = {
     updatePlanilha,
     updatePlanilhaAtleta,
     updateStatusAtleta,
+    updatePRHistory,
 
     insertPRHistory,
     insertPlanilha,
