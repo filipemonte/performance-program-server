@@ -591,7 +591,7 @@ function filterData(value)
 
 const gerarToken = (id) => {
     var token = jwt.sign({ id }, config.get('api.jwtsecret'), {
-        expiresIn: 2 // expires in 5min
+        expiresIn: 3600 // expires in 5min
     });
 
     return token;
