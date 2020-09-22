@@ -63,8 +63,8 @@ const getTraining = (request, response) => {
 
         var groupedByParte = groupBy(results.rows, 'partetreino')
         var list = Object.entries(groupedByParte).map((t) => t)
-
-        response.status(200).json(list)
+        
+        response.status(200).json(list.sort(([a], [b]) => a.localeCompare(b)))
     })
 }
 
@@ -549,7 +549,7 @@ const getChartTreinosRealizados = (request, response) => {
 
     pool.query(`SELECT treino.id, treino.data, treinoatleta.done
     FROM treino 
-    left join treinoatleta on treino.id = treinoatleta.idtreino and treinoatleta.idatleta =  18
+    left join treinoatleta on treino.id = treinoatleta.idtreino
     WHERE
     treino.data >= '${anoAtual}-01-01' and treino.data <= '${anoAtual}-12-31' and
     treino.idplanilha = (select idplanilha from planilhaatleta where idAtleta = ${request.params.idAtleta})`, (error, results) => {
